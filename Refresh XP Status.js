@@ -6,7 +6,7 @@
 Setup:
 
 1. Save this image to Files/iCloud Drive/Scriptable/
-   https://i.imgur.com/CXzDZkD.png
+   https://github.com/sac396/H5-XP/blob/main/bg1.png?raw=true 
 
 2. Fill out the User Prefs (Scroll down a bit)
 
@@ -52,10 +52,10 @@ DM me at u/sac396 if you need help <3
 /*-----------------------------------------*/
 
 
-let apiKey = "87843a9ea9204c519460ef4221e543e7"
+let apiKey = ""
 // https://developer.haloapi.com/signin > Profile > Your Subscriptions > Copy one of the API Keys
 
-let gamertag = "sac396"
+let gamertag = ""
 // Include any spaces. Not case sensitive
 
 let targetCompletionDate = "November 20, 2021"
