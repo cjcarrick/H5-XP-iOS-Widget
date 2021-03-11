@@ -167,7 +167,7 @@ dc.drawImageInRect(armorImage, new Rect(510, 50, 512 * armorImageScale, 672 * ar
 dc.setTextAlignedLeft()
 
 let textContainer1 = new Rect(leftOffset, topOffset +  10, ( rightOffset - leftOffset ), rectHeight)
-dc.drawTextInRect("SR 152", textContainer1)
+dc.drawTextInRect("SR " + currentLevel, textContainer1)
 
 let textContainer3 = new Rect(leftOffset, topOffset +  40, ( rightOffset - leftOffset ), rectHeight)
 dc.drawTextInRect("TOTAL", textContainer3)
