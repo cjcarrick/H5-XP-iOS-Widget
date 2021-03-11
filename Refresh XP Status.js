@@ -63,7 +63,7 @@ let targetCompletionDate = "November 20, 2021"
 let BGImageName = "bg1.png"
 // Save to iCloud Drive/Scriptable/
 
-let font = "Halo Font"
+let font = "ArialRoundedMTBold"
 // Find fonts at iosfonts.com
 
 let fontSize = 18
