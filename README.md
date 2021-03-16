@@ -4,7 +4,7 @@ Scriptable widget to show Halo 5 XP Progress
 ### Installation
 
 1. Download [Scriptable from the App Store](https://apps.apple.com/us/app/scriptable/id1405459188).
-2. Make a new script in Scriptable, and paste in the code [here](/H5-XP.json).
+2. Make a new script in Scriptable, and paste in the code [here](https://raw.githubusercontent.com/sac396/H5-XP-iOS-Widget/main/H5-XP.js).
 3. Run the script. It should detect everything you are missing and download the things it can along the way.
 4. Add a medium size Scriptable widget and set it to this script.
 
