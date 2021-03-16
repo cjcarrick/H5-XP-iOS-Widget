@@ -2,13 +2,13 @@
 // These must be at the very top of the file. Do not edit.
 // icon-color: deep-blue; icon-glyph: sync-alt;
 /*
-  
-Setup:
-2. Fill out the User Prefs (Scroll down a bit)
-4. Install this shortcut: 
-   https://www.icloud.com/shortcuts/ca90d07d2b9e4fc6b0ab86685038a8ca
-5. Put in your API Key and Gamertag, then run it once.
-6. In shortcuts go to:
+
+* IMPORTANT PLS READ *
+This script needs to update on its own. To do that, it uses Shortcuts. It's another app by Apple. You need to download it if you have't already. Once it's installed you can run the script. It will guide you through the rest.
+
+Once you have successfully run it once, complete the following steps. It makes sure the daily XP gain resets each day.
+
+In shortcuts go to:
    Automations, then
    New Personal Automation
    Tap "Time of day"
@@ -19,49 +19,41 @@ Setup:
    Tap "Next"
    Turn off "Ask Before Running"
    Tap "Done"
-7. In Scriptable go to:
-   Settings, then
-   File Bookmarks
-   New Bookmark
-   File
-   Go in the Shortcuts folder and select "H5-XP.json"
-   Leave the name as "H5-XP.json"
-   Tap "Save"
-7. Add a medium scriptable widget to your home screen, set it to this sctipt, and you're done.
+
 Note: For the first day, your XP for "TODAY" won't be accurate. After 1 day, assuming you set it up right, it should work.
 Another note: I'm not sure if this widget updates automatically. The easiest way to run it quickly is to set the "When Interacting" for the widget, to "Run Script." Now every time you tap the widget, it runs the script and refreshes it.
 DM me at u/sac396 if you need help <3
+
 */
 
+let useLog = true
+let startDate
+if (useLog) { startDate = new Date() }
+
+let currentVer = 1.0
+// Used for checking updates. Do not change.
+
+
+let storedXP
+let BGImageName = "H5-XP-BG.png"
+let fm = FileManager.iCloud()
+
+
+let prefsSource = fm.documentsDirectory() + "/H5-XP-Prefs.json"
+fm.downloadFileFromiCloud(prefsSource)
+prefsSource = JSON.parse(fm.readString(prefsSource))
+
 
 /*-----------------------------------------*/
-/*  User Prefs                             */
+/*  Check if script needs to be reset      */
 /*-----------------------------------------*/
 
 
-let apiKey = "87843a9ea9204c519460ef4221e543e7"
-// https://developer.haloapi.com/signin > Profile > Your Subscriptions > Copy one of the API Keys
-
-let gamertag = "sac396"
-// Include any spaces. Not case sensitive
-
-let targetCompletionDate = "November 20, 2021"
-
-let font = "ArialRoundedMTBold"
-// Find fonts at iosfonts.com
-
-let fontSize = 18
-
-let showSR = true
-let showTotalXP = true
-let showTodaysXP = true
-let showTodaysGoal = true
-let showXPtoMax = true
-let showXPtoNextSR = "auto"  // accepts "always", "never", or "auto." Auto will show it unless you are SR 151 or 152
-let showEmblem = true
-let showArmor = true
-let useBackgroundImage = false
-let checkForUpdates = true
+if (prefsSource.resetPrefs) {
+   prefsSource = await new Request("https://raw.githubusercontent.com/sac396/H5-XP-iOS-Widget/main/Default-Prefs").loadJSON()
+   fm.writeString(fm.documentsDirectory() + "\/H5-XP-Prefs.json", JSON.stringify(prefsSource))
+   throw new Error("Prefs successfully reset")
+}
 
 
 /*-----------------------------------------*/
@@ -69,39 +61,145 @@ let checkForUpdates = true
 /*-----------------------------------------*/
 
 
-// Retrieve the stored XP from the shortcut, and the background image from iCloud
+if (!prefsSource.apiKey) {
 
+   if (useLog) { log("No API Key Found") }
 
-let BG1, storedXP
-let BGImageName = "H5-XP-BG.png"
-let fm = FileManager.iCloud()
+   apiKeyAlert = new Alert()
+   apiKeyAlert.title = "No API Key Found"
+   apiKeyAlert.message = "Head to developer.haloapi.com to get a key. Copy it to your clipboard. Then come back, run the script again, and tap \"Paste my Key.\""
+   apiKeyAlert.addAction("Go to developer.haloapi.com")
+   apiKeyAlert.addAction("Paste my key")
+   apiKeyAlert.addAction("Cancel")
+   let alertIndex = await apiKeyAlert.presentAlert()
 
-let iCloudShortcutLink = "https://www.icloud.com/shortcuts/67731c5a806843fabff1c16f8998b24a"
+   if (alertIndex == 1) {
 
-if (!fm.bookmarkExists("H5-XP.json")) {
-   let detectionAlert = new Alert()
-   detectionAlert.title = "No \"H5-XP.json\" Bookmark Detectd"
-   detectionAlert.message = "The script won't work without it. This probably means you just haven't gotten the Shortcut yet. Get it, then run it once."
-   detectionAlert.addAction("Add Shortcut")
-   detectionAlert.addCancelAction("Cancel")
-   let alertIndex = await detectionAlert.presentAlert()
-   log(alertIndex)
+      prefsSource.apiKey = Pasteboard.paste()
+      fm.writeString(fm.documentsDirectory() + "\/H5-XP-Prefs.json", JSON.stringify(prefsSource))
+
+      if (useLog) { log("Saved API Key \"" + prefsSource.apiKey + "\" to H5-XP-Prefs.json") }
+
+   } else if (alertIndex == 0) {
+      Safari.open("https://developer.haloapi.com/signin")
+      throw new Error("Script aborted")
+   } else {
+      throw new Error("Script aborted")
+   }
+
+} else {
+
+   if (useLog) { log("Running with API Key \"" + prefsSource.apiKey + "\"") }
+
+}
+
+if (!prefsSource.gamertag) {
+
+   if (useLog) { log("No Gamertag Found") }
+
+   gamertagAlert = new Alert()
+   gamertagAlert.title = "No Gamertag Found"
+   gamertagAlert.message = "Enter it below then tap the Return key on the keyboard. Don't worry, this is the only time you'll have to enter it manually."
+   gamertagAlert.addTextField()
+   gamertagAlert.addAction("Cancel")
+   let alertIndex = await gamertagAlert.presentAlert()
+
+   if (gamertagAlert.textFieldValue(0) == "") {
+
+      throw new Error("Script aborted")
+
+   } else {
+
+      prefsSource.gamertag = gamertagAlert.textFieldValue(0)
+      log(prefsSource.gamertag)
+      fm.writeString(fm.documentsDirectory() + "\/H5-XP-Prefs.json", JSON.stringify(prefsSource))
+
+      if (useLog) { log("Saved Gamertag \"" + prefsSource.gamertag + "\" to H5-XP-Prefs.json") }
+
+   }
+
+} else {
+
+   if (useLog) { log("Running with gamertag \"" + prefsSource.gamertag + "\"") }
+
+}
+
+if (!prefsSource.targetCompletionDate) {
+
+   if (useLog) { log("No Target Completion Date Set") }
+
+   targetCompletionDateAlert = new Alert()
+   targetCompletionDateAlert.title = "No Target Completion Date Set"
+   targetCompletionDateAlert.message = "This is used to determine the Goal, how much XP you need per day. Enter it below then tap Return on your keyboard."
+   targetCompletionDateAlert.addTextField("e.g. November 20, 2021")
+   targetCompletionDateAlert.addAction("Cancel")
+   let alertIndex = await targetCompletionDateAlert.presentAlert()
+
+   if (alertIndex == 0) {
+
+      prefsSource.targetCompletionDate = targetCompletionDateAlert.textFieldValue(0)
+      log(prefsSource.targetCompletionDate)
+      fm.writeString(fm.documentsDirectory() + "\/H5-XP-Prefs.json", JSON.stringify(prefsSource))
+
+      if (useLog) { log("Saved Target Completion Date \"" + prefsSource.targetCompletionDate + "\" to H5-XP-Prefs.json") }
+
+   } else {
+      throw new Error("Script aborted")
+   }
+
+} else {
+
+   if (useLog) { log("Running with Target Completion Date \"" + prefsSource.targetCompletionDate + "\"") }
+
+}
+
+if (!fm.bookmarkExists("H5-XP-StoredXP.json")) {
+
+   if (useLog) { log("Fetching saved XP from iCloud...") }
+
+   let bookmarkDetectionAlert = new Alert()
+   bookmarkDetectionAlert.title = "No \"H5-XP-StoredXP.json\" Bookmark Detectd"
+   bookmarkDetectionAlert.message = "The script won't work without it. This probably means you just haven't gotten the Shortcut yet. Get it, then run it once."
+   bookmarkDetectionAlert.addAction("Add Shortcut")
+   bookmarkDetectionAlert.addCancelAction("Cancel")
+   let alertIndex = await bookmarkDetectionAlert.presentAlert()
+
    if (alertIndex >= 0) {
-      Safari.open(iCloudShortcutLink)
+
+      Safari.open("https://www.icloud.com/shortcuts/bb06836f5a6e4aecaba92f8bd659b4df")
+
    } else {
 
    }
 }
 
-if (useBackgroundImage && !fm.fileExists(fm.documentsDirectory() + "/" + BGImageName)) {
-   log(fm.fileExists(fm.documentsDirectory() + "/" + BGImageName))
+if (prefsSource.useBackgroundImage && !fm.fileExists(fm.documentsDirectory() + "/" + BGImageName)) {
+
+   if (useLog) { log("BG Image not found. Downloading and saving to iCloud...") }
+
    let img = await new Request("https://raw.githubusercontent.com/sac396/H5-XP-iOS-Widget/main/H5-XP-BG.png").loadImage()
    fm.writeImage(fm.documentsDirectory() + "/" + BGImageName, img)
 }
 
-if (showTodaysGoal || showTodaysXP) {
-   storedXP = fm.readString(fm.bookmarkedPath("H5-XP.json"))
+if (prefsSource.showTodaysGoal || prefsSource.showTodaysXP) {
+   storedXP = fm.readString(fm.bookmarkedPath("H5-XP-StoredXP.json"))
    storedXP = JSON.parse(storedXP)["Stored XP"]
+}
+
+
+/*-----------------------------------------*/
+/*  Check for Updates                   */
+/*-----------------------------------------*/
+
+
+if (prefsSource.checkForUpdates) {
+   let newestVer = await new Request("https://raw.githubusercontent.com/sac396/H5-XP-iOS-Widget/main/version.json").loadJSON()
+   if (newestVer[0] > currentVer) {
+      log("Version " + newestVer[0] + " of H5-XP avalible at https://raw.githubusercontent.com/sac396/H5-XP-iOS-Widget/main/H5-XP.js.")
+   } else {
+      log("H5-XP is up to date.")
+   }
+   log("You have version " + currentVer)
 }
 
 
@@ -113,34 +211,43 @@ if (showTodaysGoal || showTodaysXP) {
 // Retrieve stuff from the Halo API
 
 
+let gamertag = prefsSource.gamertag
 gamertag = gamertag.replace(" ", "%20")
 
 let currentXP, currentSR, emblemImage, armorImage, XPGain
 let nf = new Intl.NumberFormat
 
-if (showTodaysGoal || showTodaysXP || showTotalXP || showXPtoMax || showSR || showXPtoNextSR) {
+if (prefsSource.showTodaysGoal || prefsSource.showTodaysXP || prefsSource.showTotalXP || prefsSource.showXPtoMax || prefsSource.showSR || prefsSource.showXPtoNextSR) {
+
+   if (useLog) { log("Fetching current XP data from haloapi.com...") }
 
    let XPREQ = new Request("https://www.haloapi.com/stats/h5/servicerecords/campaign?players=" + gamertag)
-   XPREQ.headers = { "Ocp-Apim-Subscription-Key": apiKey }
+   XPREQ.headers = { "Ocp-Apim-Subscription-Key": prefsSource.apiKey }
 
    let XPRES = await XPREQ.loadJSON()
 
    currentXP = XPRES["Results"][0]["Result"]["Xp"]
 
-   if (showSR || showXPtoNextSR) {
+   if (prefsSource.showSR || prefsSource.showXPtoNextSR) {
       currentSR = XPRES["Results"][0]["Result"]["SpartanRank"]
    }
 }
 
-if (showEmblem) {
+if (prefsSource.showEmblem) {
+
+   if (useLog) { log("Fetching emblem image from haloapi.com...") }
+
    let emblemREQ = new Request("https://www.haloapi.com/profile/h5/profiles/" + gamertag + "/emblem")
-   emblemREQ.headers = { "Ocp-Apim-Subscription-Key": apiKey }
+   emblemREQ.headers = { "Ocp-Apim-Subscription-Key": prefsSource.apiKey }
    emblemImage = await emblemREQ.loadImage()
 }
 
-if (showArmor) {
+if (prefsSource.showArmor) {
+
+   if (useLog) { log("Fetching armor image from haloapi.com...") }
+
    let armorREQ = new Request("https://www.haloapi.com/profile/h5/profiles/" + gamertag + "/spartan")
-   armorREQ.headers = { "Ocp-Apim-Subscription-Key": apiKey }
+   armorREQ.headers = { "Ocp-Apim-Subscription-Key": prefsSource.apiKey }
    armorImage = await armorREQ.loadImage()
 }
 
@@ -149,6 +256,7 @@ if (showArmor) {
 /*  Set Up Draw Contexts                   */
 /*-----------------------------------------*/
 
+if (useLog) { log("Setting up widget...") }
 
 let widget = new ListWidget()
 widget.setPadding(0, 0, 0, 0)
@@ -159,7 +267,7 @@ dc.opaque = false
 dc.size = new Size(675, 275)
 
 
-font = new Font(font, fontSize)
+font = new Font(prefsSource.font, prefsSource.fontSize)
 dc.setFont(font)
 dc.setTextColor(new Color("#ffffff"))
 
@@ -187,6 +295,7 @@ function addElement(left, right, isFooter) {
    dc.drawTextInRect(left, textContainer)
    dc.setTextAlignedRight()
    dc.drawTextInRect(right, textContainer)
+   if (useLog) { log("Successfully drew \"" + left + " : " + right + "\"") }
    elementIndex += 1
 }
 
@@ -198,43 +307,47 @@ function addElement(left, right, isFooter) {
 
 // Right side : Armor + Emblem
 
+if (prefsSource.showEmblem) {
+   let emblemImageScale = .75
+   dc.drawImageInRect(emblemImage, new Rect(455, 30, 256 * emblemImageScale, 256 * emblemImageScale))
+   if (useLog) { log("Successfully drew emblem image") }
+}
 
-let emblemImageScale = .75
-dc.drawImageInRect(emblemImage, new Rect(455, 30, 256 * emblemImageScale, 256 * emblemImageScale))
-
-let armorImageScale = .4
-dc.drawImageInRect(armorImage, new Rect(510, 50, 512 * armorImageScale, 672 * armorImageScale))
+if (prefsSource.showArmor) {
+   let armorImageScale = .4
+   dc.drawImageInRect(armorImage, new Rect(510, 50, 512 * armorImageScale, 672 * armorImageScale))
+   if (useLog) { log("Successfully drew armor image") }
+}
 
 
 // Left side : Stats
 
 
-if (showSR) { addElement("SR " + currentSR, "") }
+if (prefsSource.showSR) { addElement("SR " + currentSR, "") }
 
-if (showTotalXP) {
+if (prefsSource.showTotalXP) {
    let totalXP = nf.format(currentXP) + " (" + Math.round(currentXP / 50000) / 10 + "%)"
    addElement("TOTAL", totalXP)
+
 }
 
-if (showTodaysXP) {
+if (prefsSource.showTodaysXP) {
    let XPGain = nf.format(currentXP - storedXP)
    addElement("TODAY", XPGain)
+
 }
 
-if (showTodaysGoal) {
-   let daysUntilTarget = Math.ceil((new Date(targetCompletionDate) - new Date()) / (1000 * 60 * 60 * 24))
+if (prefsSource.showTodaysGoal) {
+   let daysUntilTarget = Math.ceil((new Date(prefsSource.targetCompletionDate) - new Date()) / (1000 * 60 * 60 * 24))
    addElement("GOAL", nf.format(Math.ceil((50000000 - currentXP) / daysUntilTarget)))
 }
 
 let showXPtoNextSRBool
-if ((showXPtoNextSR == "auto" && currentSR < 151) || showXPtoNextSR == "always") {
-   showXPtoNextSRBool = true
+if ((prefsSource.showXPtoNextSR == "auto" && currentSR < 151) || prefsSource.showXPtoNextSR == "always") {
+   prefsSource.showXPtoNextSRBool = true
 } else {
-   showXPtoNextSRBool = false
+   prefsSource.showXPtoNextSRBool = false
 }
-
-log(showXPtoNextSRBool)
-
 if (showXPtoNextSRBool) {
    let XPperSR =
       [
@@ -393,11 +506,17 @@ if (showXPtoNextSRBool) {
       ]
    let XPtoNextSR = XPperSR[currentSR] - currentXP
    addElement("XP TO SR " + (currentSR += 1), nf.format(XPtoNextSR))
+
 }
 
-if (showXPtoMax) {
-   let XPtoMax = nf.format(50000000 - currentXP)
-   addElement("XP TO MAX", XPtoMax, true)
+if (prefsSource.showXPtoMax) {
+   if (currentSR >= 152) {
+      let XPtoMax = nf.format(100000000 - currentXP)
+      addElement("XP TO 100 MIL", XPtoMax, true)
+   } else {
+      let XPtoMax = nf.format(50000000 - currentXP)
+      addElement("XP TO MAX", XPtoMax, true)
+   }
 }
 
 
@@ -405,6 +524,7 @@ if (showXPtoMax) {
 /*  Assemble Widget                        */
 /*-----------------------------------------*/
 
+if (useLog) { log("Assembling final widget...") }
 
 widget.backgroundImage = Image.fromFile(fm.documentsDirectory() + "/" + BGImageName)
 
@@ -413,3 +533,8 @@ dcImage = widget.addImage(dcImage)
 dcImage = dcImage.centerAlignImage()
 
 Script.setWidget(widget)
+
+
+if (useLog) {
+   log("Done. Completed in " + ((new Date() - startDate) / 1000) + " seconds")
+}
