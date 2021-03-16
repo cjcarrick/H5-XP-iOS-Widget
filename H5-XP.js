@@ -38,10 +38,14 @@ let storedXP
 let BGImageName = "H5-XP-BG.png"
 let fm = FileManager.iCloud()
 
-
-let prefsSource = fm.documentsDirectory() + "/H5-XP-Prefs.json"
-fm.downloadFileFromiCloud(prefsSource)
-prefsSource = JSON.parse(fm.readString(prefsSource))
+if (!fm.fileExists(fm.documentsDirectory() + "/H5-XP-Prefs.json")) {
+   prefsSource = await new Request("https://raw.githubusercontent.com/sac396/H5-XP-iOS-Widget/main/Default-Prefs").loadJSON()
+   fm.writeString(fm.documentsDirectory() + "\/H5-XP-Prefs.json", JSON.stringify(prefsSource))
+} else {
+   let prefsSource = fm.documentsDirectory() + "/H5-XP-Prefs.json"
+   fm.downloadFileFromiCloud(prefsSource)
+   prefsSource = JSON.parse(fm.readString(prefsSource))
+}
 
 
 /*-----------------------------------------*/
