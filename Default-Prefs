@@ -1,0 +1,18 @@
+{
+    "apiKey": "",
+    "gamertag": "",
+    "targetCompletionDate": "",
+    "font": "Arial-BoldMT",
+    "fontSize": 18,
+    "useBackgroundImage": true,
+    "showXPtoNextSR": "auto",
+    "showSR": true,
+    "showTotalXP": true,
+    "showTodaysXP": true,
+    "showTodaysGoal": true,
+    "showXPtoMax": true,
+    "showArmor": true,
+    "showEmblem": true,
+    "checkForUpdates": true,
+    "resetPrefs": false
+}
