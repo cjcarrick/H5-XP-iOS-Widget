@@ -8,6 +8,8 @@ Takes your XP and SR too. There's no delay between the time you finish a match a
 
 ## Installation
 
+I tried to make this as easy to set up as possible. It shouldn't take more than 5-10 minutes at the most. As you run the script, it should guide you through the process as well, and these instructions are really only a supplement.
+
 1. Download [Scriptable from the App Store](https://apps.apple.com/us/app/scriptable/id1405459188).
 2. Make a new script in Scriptable, and paste in the code [here](https://raw.githubusercontent.com/sac396/H5-XP-iOS-Widget/main/H5-XP.js). 
 3. Run the script. It should detect everything you are missing and download the things it can along the way. It will ask you for the things it doesn't know. If you get confused, maybe read through the rest of this page and you'll understand.
