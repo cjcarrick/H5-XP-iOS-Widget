@@ -24,9 +24,9 @@ You will need to get the following too:
   - The [Shortcuts app](https://apps.apple.com/us/app/shortcuts/id1462947752).
   - [This shortcut](https://www.icloud.com/shortcuts/ca90d07d2b9e4fc6b0ab86685038a8ca).
     - Run this a few times. It may ask for permissions; just run it until it finishes completely with no prompts or alerts.
-- If you want to access the ```.js```, ```.json```, or ```.png``` files, get [the Files app](https://apps.apple.com/us/app/files/id1232058109) from the app store. This isn't required, but you need it if you want to see all the files the script creates.
+- If you want to access the ```.js```, ```.json```, or ```.png``` files, get [the Files app](https://apps.apple.com/us/app/files/id1232058109) from the app store. This isn't required, but you need it if you want to see all the files the script creates. Not all of the files will be there
   - One of the files is in /iCloud Drive/Shortcuts/
-  - The rest are in /iCloud Drive/Scriptable
+  - The rest are in /iCloud Drive/Scriptable/
 
 #### Setting the Shortcut to Run on its Own (Important):
 
@@ -46,6 +46,7 @@ In order for the daily XP to _automatically_ reset _every night_ you need to set
 - For the first day, the Today part of the widget will be wrong. This is normal too. Assuming you set up the automation and everything is correctly, it will fix itself.
 - I'm pretty sure the widget doesn't update on its own. If you did step 4 correctly, you should be able to tap the widget and it will open the Scriptable app and run the script. Then go back home and it should be refreshed.
 - Open the script before running it and you can see the log. This isn't necessary, but if there's a problem you can see what step the script is stuck on which makes debugging much easier.
+- The 
 
 ## Prefs File
 
