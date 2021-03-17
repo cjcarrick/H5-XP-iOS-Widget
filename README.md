@@ -70,3 +70,10 @@ Accepts ```true``` or ```false```. If ```true```, each time you run the script i
 ##### ```resetPrefs```
 
 Accepts  ```true``` or ```false```. If ```true```, it will reset everything in H5-XP-Prefs.json to the defaults the next time you run the script. This means you will be asked for your API Key, Gamertag, and Target Completion Date again.
+
+###  Version History
+
+##### v1.0
+
+- Initial Release
+
