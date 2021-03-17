@@ -1,5 +1,5 @@
 # H5 XP
-Scriptable widget to show Halo 5 XP Progress
+Scriptable widget to show Halo 5 XP Progress from the Home Screen
 
 ![preview.png](https://github.com/sac396/H5-XP/blob/main/preview.png?raw=true)
 
