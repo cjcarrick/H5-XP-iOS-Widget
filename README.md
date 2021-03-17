@@ -4,7 +4,7 @@ Scriptable widget to show Halo 5 XP Progress
 ![preview.png](https://github.com/sac396/H5-XP/blob/main/preview.png?raw=true)
 
 Takes your armor and emblem from the game.
-Takes your XP and SR too. You have to manually refresh the widget, but I go over a way to do that quickly in the instructions. There's no delay between the time you finish a match and gain XP and when the widget can access the data. All data comes direct from 343. The widgit itself takes ≈3 seconds. You can see exactly how long it took in the log.
+Takes your XP and SR too. There's no delay between the time you finish a match and gain XP and when the widget can access the data. All data comes direct from 343. The widget itself takes ≈3 seconds to refresh. You can see exactly how long it took in the log.
 
 ## Installation
 
