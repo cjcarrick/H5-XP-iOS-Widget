@@ -1,48 +1,31 @@
 // Variables used by Scriptable.
 // These must be at the very top of the file. Do not edit.
 // icon-color: deep-blue; icon-glyph: sync-alt;
+
 /*
 
-* IMPORTANT PLS READ *
-This script needs to update on its own. To do that, it uses Shortcuts. It's another app by Apple. You need to download it if you have't already. Once it's installed you can run the script. It will guide you through the rest.
-
-Once you have successfully run it once, complete the following steps. It makes sure the daily XP gain resets each day.
-
-In shortcuts go to:
-   Automations, then
-   New Personal Automation
-   Tap "Time of day"
-   (Set time to something like 2 am)
-   Tap "Next"
-   Add a "Run Shortcut" Action
-   Set it to the shurtcut from steps 4 & 5
-   Tap "Next"
-   Turn off "Ask Before Running"
-   Tap "Done"
-
-Note: For the first day, your XP for "TODAY" won't be accurate. After 1 day, assuming you set it up right, it should work.
-Another note: I'm not sure if this widget updates automatically. The easiest way to run it quickly is to set the "When Interacting" for the widget, to "Run Script." Now every time you tap the widget, it runs the script and refreshes it.
-DM me at u/sac396 if you need help <3
+Detailed setup instructions and more info avalible at https://github.com/sac396/H5-XP-iOS-Widget.
 
 */
 
 let useLog = true
+
 let startDate
 if (useLog) { startDate = new Date() }
 
 let currentVer = 1.0
 // Used for checking updates. Do not change.
 
-
 let storedXP
 let BGImageName = "H5-XP-BG.png"
 let fm = FileManager.iCloud()
 
+let prefsSource
 if (!fm.fileExists(fm.documentsDirectory() + "/H5-XP-Prefs.json")) {
    prefsSource = await new Request("https://raw.githubusercontent.com/sac396/H5-XP-iOS-Widget/main/Default-Prefs").loadJSON()
-   fm.writeString(fm.documentsDirectory() + "\/H5-XP-Prefs.json", JSON.stringify(prefsSource))
+   fm.writeString(fm.documentsDirectory() + "\/H5-XP-Prefs.json", JSON.stringify(prefsSource, null, 4))
 } else {
-   let prefsSource = fm.documentsDirectory() + "/H5-XP-Prefs.json"
+   prefsSource = fm.documentsDirectory() + "/H5-XP-Prefs.json"
    fm.downloadFileFromiCloud(prefsSource)
    prefsSource = JSON.parse(fm.readString(prefsSource))
 }
@@ -55,7 +38,7 @@ if (!fm.fileExists(fm.documentsDirectory() + "/H5-XP-Prefs.json")) {
 
 if (prefsSource.resetPrefs) {
    prefsSource = await new Request("https://raw.githubusercontent.com/sac396/H5-XP-iOS-Widget/main/Default-Prefs").loadJSON()
-   fm.writeString(fm.documentsDirectory() + "\/H5-XP-Prefs.json", JSON.stringify(prefsSource))
+   fm.writeString(fm.documentsDirectory() + "\/H5-XP-Prefs.json", JSON.stringify(prefsSource, null, 4))
    throw new Error("Prefs successfully reset")
 }
 
@@ -80,12 +63,12 @@ if (!prefsSource.apiKey) {
    if (alertIndex == 1) {
 
       prefsSource.apiKey = Pasteboard.paste()
-      fm.writeString(fm.documentsDirectory() + "\/H5-XP-Prefs.json", JSON.stringify(prefsSource))
+      fm.writeString(fm.documentsDirectory() + "\/H5-XP-Prefs.json", JSON.stringify(prefsSource, null, 4))
 
       if (useLog) { log("Saved API Key \"" + prefsSource.apiKey + "\" to H5-XP-Prefs.json") }
 
    } else if (alertIndex == 0) {
-      Safari.open("https://developer.haloapi.com/signin")
+      Safari.open("(https://developer.haloapi.com/signin?ReturnUrl=%2Fproducts%2F560af1e42109182040fb56fc")
       throw new Error("Script aborted")
    } else {
       throw new Error("Script aborted")
@@ -116,7 +99,7 @@ if (!prefsSource.gamertag) {
 
       prefsSource.gamertag = gamertagAlert.textFieldValue(0)
       log(prefsSource.gamertag)
-      fm.writeString(fm.documentsDirectory() + "\/H5-XP-Prefs.json", JSON.stringify(prefsSource))
+      fm.writeString(fm.documentsDirectory() + "\/H5-XP-Prefs.json", JSON.stringify(prefsSource, null, 4))
 
       if (useLog) { log("Saved Gamertag \"" + prefsSource.gamertag + "\" to H5-XP-Prefs.json") }
 
@@ -143,7 +126,7 @@ if (!prefsSource.targetCompletionDate) {
 
       prefsSource.targetCompletionDate = targetCompletionDateAlert.textFieldValue(0)
       log(prefsSource.targetCompletionDate)
-      fm.writeString(fm.documentsDirectory() + "\/H5-XP-Prefs.json", JSON.stringify(prefsSource))
+      fm.writeString(fm.documentsDirectory() + "\/H5-XP-Prefs.json", JSON.stringify(prefsSource, null, 4))
 
       if (useLog) { log("Saved Target Completion Date \"" + prefsSource.targetCompletionDate + "\" to H5-XP-Prefs.json") }
 
@@ -164,16 +147,17 @@ if (!fm.bookmarkExists("H5-XP-StoredXP.json")) {
    let bookmarkDetectionAlert = new Alert()
    bookmarkDetectionAlert.title = "No \"H5-XP-StoredXP.json\" Bookmark Detectd"
    bookmarkDetectionAlert.message = "The script won't work without it. This probably means you just haven't gotten the Shortcut yet. Get it, then run it once."
+   bookmarkDetectionAlert.addAction("Download Shortcuts")
    bookmarkDetectionAlert.addAction("Add Shortcut")
    bookmarkDetectionAlert.addCancelAction("Cancel")
    let alertIndex = await bookmarkDetectionAlert.presentAlert()
 
-   if (alertIndex >= 0) {
-
+   if (alertIndex == 1) {
       Safari.open("https://www.icloud.com/shortcuts/bb06836f5a6e4aecaba92f8bd659b4df")
-
+   } else if (alertIndex == 0) {
+      Safari.open("https://www.icloud.com/shortcuts/bb06836f5a6e4aecaba92f8bd659b4df")
    } else {
-
+      throw new Error("Script aborted")
    }
 }
 
