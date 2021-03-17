@@ -68,7 +68,6 @@ Accepts ```true``` or ```false```. If you are SR 152 already, it will show the r
 
 Accepts ```true``` or ```false```. If ```true```, each time you run the script it will check for new H5-XP updates in the Log from this Github. 
 
-##### ```resetPrefs```
 
 ### Resetting Prefs
 
