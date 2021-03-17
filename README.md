@@ -73,7 +73,7 @@ Accepts ```true``` or ```false```. If ```true```, each time you run the script i
 
 You con reset the preferences to defaults by opening the files app and deleting the file at /iCloud/Scriptable/H5-XP-Prefs.json. The next time you run the script, it will download the defualt prefs file from this Github. This means you will be asked for your API Key, Gamertag, and Target Completion Date again.
 
-###  Version History
+##  Version History
 
 ##### v1.0
 
