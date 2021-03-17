@@ -21,6 +21,7 @@ You will need to get the following too:
 - A shortcut to automatically reset Daily XP part of the widget each night
   - The [Shortcuts app](https://apps.apple.com/us/app/shortcuts/id1462947752)
   - [This shortcut](https://www.icloud.com/shortcuts/ca90d07d2b9e4fc6b0ab86685038a8ca)
+    - Run this a few times
 
 #### Setting the Shortcut to Run on its Own (Important):
 
@@ -69,7 +70,9 @@ Accepts ```true``` or ```false```. If ```true```, each time you run the script i
 
 ##### ```resetPrefs```
 
-Accepts  ```true``` or ```false```. If ```true```, it will reset everything in H5-XP-Prefs.json to the defaults the next time you run the script. This means you will be asked for your API Key, Gamertag, and Target Completion Date again.
+### Resetting Prefs
+
+You con reset the preferences to defaults by opening the files app and deleting the file at /iCloud/Scriptable/H5-XP-Prefs.json. The next time you run the script, it will download the defualt prefs file from this Github. This means you will be asked for your API Key, Gamertag, and Target Completion Date again.
 
 ###  Version History
 
