@@ -75,7 +75,7 @@ You con reset the preferences to defaults by opening the files app and deleting 
 
 ##  Version History
 
-##### v1.0
+#### v1.0
 
 - Initial Release
 
