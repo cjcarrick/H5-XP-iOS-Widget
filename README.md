@@ -22,7 +22,7 @@ You will need to get the following too:
   - Subscribe (it's free and they don't spam you), then you will see your keys. Either will work.
 - A shortcut to automatically reset Daily XP part of the widget each night. This includes:
   - The [Shortcuts app](https://apps.apple.com/us/app/shortcuts/id1462947752).
-  - [This shortcut](https://www.icloud.com/shortcuts/ca90d07d2b9e4fc6b0ab86685038a8ca).
+  - [This shortcut](https://www.icloud.com/shortcuts/f00ad74cf1d943e09c120585b4aa2e78).
     - Run this a few times. It may ask for permissions; just run it until it finishes completely with no prompts or alerts.
 
 #### Setting the Shortcut to Run on its Own (Important):
