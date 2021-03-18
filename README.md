@@ -51,6 +51,10 @@ In order for the daily XP to _automatically_ reset _every night_ you need to set
 
 Once you run the script, a Preferences file called "H5-XP-Prefs.json" will be saved to /iCloud/Scriptable/. You shouldn't _need_ to go in there (default settings are fine), but you can if you wish. Here is what each thing does:
 
+### Editing Prefs
+
+I'm sorry but there really isn't a great way to edit the H5-XP-Prefs.json file on iOS. If you can access iCloud from a Mac or PC, just open the ```.json``` file, change what you want and save it. There is a JSON editor you can download called [Jayson](https://apps.apple.com/us/app/jayson/id1447750768) if you need to do it on iOS. Once downloaded, go to the Browse tab, then /iCloud/Scriptable/H5-XP-Prefs.json. Remember to save when you finish and that capitalization is important.
+
 ##### ```apiKey```, ```gamertag```, ```targetCompletionDate```
 
 These are set the first couple times you run the script. They are in the preferences file so you can change them later if you need.
