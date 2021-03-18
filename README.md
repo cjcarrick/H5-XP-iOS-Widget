@@ -66,7 +66,7 @@ let prefsSource.apiKey = "12345"
 
 ```
 
-Here is each property:
+### Here is an explanation of each property:
 
 ##### ```apiKey```, ```gamertag```, ```targetCompletionDate```
 
