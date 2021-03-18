@@ -29,10 +29,10 @@ You will need to get the following too:
 
 In order for the daily XP to _automatically_ reset _every night_ you need to set an **automation**. Here's how:
 
-1. With the shortcut already installed, run it one time (tap its icon), and go to the automation tab (looks like a clock).
+1. With the shortcut already installed, run it one time (tap its icon), then go to the automation tab (looks like a clock).
 2. Make a new Personal Automation and set it to "Time of Day."
 3. Set the time to something like 2:00 am, or a time when you are usually asleep. Make sure it repeats daily.
-4. Tap Next then add the action "Run Shortcut" and select the H5-XP-Background one.
+4. Tap Next then add the action "Run Shortcut" and select the one we just made.
 5. Tap Next, **_uncheck "Ask Before Running"_**, then tap Done.
 
 #### Common Issues and Some things to note 
