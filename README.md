@@ -53,7 +53,20 @@ Once you run the script, a Preferences file called "H5-XP-Prefs.json" will be sa
 
 ### Editing Prefs
 
-I'm sorry but there really isn't a great way to edit the H5-XP-Prefs.json file on iOS. If you can access iCloud from a Mac or PC, just open the ```.json``` file, change what you want and save it. There is a JSON editor you can download called [Jayson](https://apps.apple.com/us/app/jayson/id1447750768) if you need to do it on iOS. Once downloaded, go to the Browse tab, then /iCloud/Scriptable/H5-XP-Prefs.json. Remember to save when you finish and that capitalization is important.
+The best way to edit the prefs is to do so _indirectly_. Around lines 40-50 in the script, there is a "Modify Prefs Here" section. For each thing you want to change, add in the code like this:
+
+```
+/*-----------------------------------------*/
+/*  Modify Prefs Here                      */
+/*-----------------------------------------*/
+
+
+let prefsSource.showEmblem = false
+let prefsSource.apiKey = "12345"
+
+```
+
+Here is each property:
 
 ##### ```apiKey```, ```gamertag```, ```targetCompletionDate```
 
