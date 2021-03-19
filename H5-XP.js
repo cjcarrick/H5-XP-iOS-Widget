@@ -8,6 +8,12 @@ Detailed setup instructions and more info avalible at https://github.com/sac396/
 
 */
 
+
+/*-----------------------------------------*/
+/*  Initial Script Setup                   */
+/*-----------------------------------------*/
+
+
 let useLog = true
 
 let startDate
@@ -32,15 +38,12 @@ if (!fm.fileExists(fm.documentsDirectory() + "/H5-XP-Prefs.json")) {
 
 
 /*-----------------------------------------*/
-/*  Check if script needs to be reset      */
+/*  Modify Prefs Here                      */
 /*-----------------------------------------*/
 
 
-if (prefsSource.resetPrefs) {
-   prefsSource = await new Request("https://raw.githubusercontent.com/sac396/H5-XP-iOS-Widget/main/Default-Prefs").loadJSON()
-   fm.writeString(fm.documentsDirectory() + "\/H5-XP-Prefs.json", JSON.stringify(prefsSource, null, 4))
-   throw new Error("Prefs successfully reset")
-}
+// example: let prefsSource.showEmblem = false
+//          let prefsSource.apiKey = "12345"
 
 
 /*-----------------------------------------*/
@@ -68,7 +71,7 @@ if (!prefsSource.apiKey) {
       if (useLog) { log("Saved API Key \"" + prefsSource.apiKey + "\" to H5-XP-Prefs.json") }
 
    } else if (alertIndex == 0) {
-      Safari.open("(https://developer.haloapi.com/signin?ReturnUrl=%2Fproducts%2F560af1e42109182040fb56fc")
+      Safari.open("https://developer.haloapi.com/signin?ReturnUrl=%2Fproducts%2F560af1e42109182040fb56fc")
       throw new Error("Script aborted")
    } else {
       throw new Error("Script aborted")
@@ -153,9 +156,9 @@ if (!fm.bookmarkExists("H5-XP-StoredXP.json")) {
    let alertIndex = await bookmarkDetectionAlert.presentAlert()
 
    if (alertIndex == 1) {
-      Safari.open("https://www.icloud.com/shortcuts/bb06836f5a6e4aecaba92f8bd659b4df")
+      Safari.open("https://www.icloud.com/shortcuts/f00ad74cf1d943e09c120585b4aa2e78")
    } else if (alertIndex == 0) {
-      Safari.open("https://www.icloud.com/shortcuts/bb06836f5a6e4aecaba92f8bd659b4df")
+      Safari.open("https://apps.apple.com/us/app/shortcuts/id1462947752")
    } else {
       throw new Error("Script aborted")
    }
@@ -327,16 +330,22 @@ if (prefsSource.showTodaysXP) {
 
 if (prefsSource.showTodaysGoal) {
    let daysUntilTarget = Math.ceil((new Date(prefsSource.targetCompletionDate) - new Date()) / (1000 * 60 * 60 * 24))
-   addElement("GOAL", nf.format(Math.ceil((50000000 - currentXP) / daysUntilTarget)))
+   addElement("GOAL", nf.format(Math.ceil((50000000 - storedXP) / daysUntilTarget)))
 }
 
 let showXPtoNextSRBool
-if ((prefsSource.showXPtoNextSR == "auto" && currentSR < 151) || prefsSource.showXPtoNextSR == "always") {
+if (prefsSource.showXPtoNextSR == "auto" && currentSR < 151) {
+   log("abc")
+   prefsSource.showXPtoNextSRBool = true
+} else if (prefsSource.showXPtoNextSR == "always") {
+   log("def")
    prefsSource.showXPtoNextSRBool = true
 } else {
+   log("hij")
    prefsSource.showXPtoNextSRBool = false
 }
 if (showXPtoNextSRBool) {
+   log("klm")
    let XPperSR =
       [
          0,
