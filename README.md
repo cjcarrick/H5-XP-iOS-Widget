@@ -102,6 +102,7 @@ You con reset the preferences to defaults by opening the files app and deleting 
 ### v1.1
 
 - Updated the broken iCloud Shortcut link. Previously, you might get an error saying you need to get a Shortcut, but then you wouldn't be able to get it. This should be fixed now
+- An update is not necessary if the script was already working fine for you. This is only for people setting up the widget for the first time.
 
 ### v1.0
 
