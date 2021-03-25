@@ -19,7 +19,7 @@ let useLog = true
 let startDate
 if (useLog) { startDate = new Date() }
 
-let currentVer = 1.0
+let currentVer = 1.1
 // Used for checking updates. Do not change.
 
 let storedXP
@@ -156,7 +156,7 @@ if (!fm.bookmarkExists("H5-XP-StoredXP.json")) {
    let alertIndex = await bookmarkDetectionAlert.presentAlert()
 
    if (alertIndex == 1) {
-      Safari.open("https://www.icloud.com/shortcuts/f00ad74cf1d943e09c120585b4aa2e78")
+      Safari.open("https://www.icloud.com/shortcuts/417b1c9d024f49f1b24708d9c95e9c62")
    } else if (alertIndex == 0) {
       Safari.open("https://apps.apple.com/us/app/shortcuts/id1462947752")
    } else {
