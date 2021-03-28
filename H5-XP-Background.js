@@ -45,13 +45,13 @@ prefs = JSON.parse(prefs.replace(/\\"|"(?:\\"|[^"])*"|(\/\/.*|\/\*[\s\S]*?\*\/)/
 let WZReq = await haloAPIJSONRequest("https://www.haloapi.com/stats/h5/servicerecords/warzone?players=!gamertag")
 let WZDuration = WZReq["Results"][0]["Result"]["WarzoneStat"]["TotalTimePlayed"]
 
-let ArenaReq = await haloAPIJSONRequest("https://www.haloapi.com/stats/h5/servicerecords/arena?players=!gamertag")
-let ArenaDuration = ArenaReq["Results"][0]["Result"]["ArenaStats"]["TotalTimePlayed"]
+let arenaReq = await haloAPIJSONRequest("https://www.haloapi.com/stats/h5/servicerecords/arena?players=!gamertag")
+let arenaDuration = arenaReq["Results"][0]["Result"]["ArenaStats"]["TotalTimePlayed"]
 
-let currentHours = durationToHours(WZDuration) + durationToHours(ArenaDuration)
+let currentHours = durationToHours(WZDuration) + durationToHours(arenaDuration)
 
 
-let currentXP = ArenaReqResults["Results"][0]["Result"]["Xp"]
+let currentXP = arenaReq["Results"][0]["Result"]["Xp"]
 
 
 async function haloAPIJSONRequest(url) {
