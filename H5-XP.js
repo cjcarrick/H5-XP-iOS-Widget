@@ -14,8 +14,8 @@ Detailed setup instructions and more info avalible at https://github.com/sac396/
 
 let prefs = {
 
-	"apiKey": "87843a9ea9204c519460ef4221e543e7",
-	"gamertag": "sac396",
+	"apiKey": "",
+	"gamertag": "",
 	// used to determine goal
 	"targetCompletionDate": "November 20, 2021",
 
