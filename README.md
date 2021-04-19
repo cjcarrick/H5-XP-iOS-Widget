@@ -72,6 +72,14 @@ In order for the daily XP to _automatically_ reset _every night_ you need to set
 
 <details>
    
+<summary>Version 1.5</summary>
+
+- Around line 270 is a big chunk of code I'm still working on that's commented out. It's kind of self explanatory, but I can't get it to work. If anyone else wants to get it working, feel free to try!
+
+</details>
+
+<details>
+   
 <summary>Version 1.1 and older</summary>
 
 - A lot of problems can be caused by incorrectly entering you gamertag, API key, or target completion date. Head to /iCloud/Scriptable/H5-XP-Prefs.json and check that "apiKey", "gamertag", and "targetCompletionDate" are all right. The best way to fix it if they aren't is to delete the prefs file and start over.
@@ -81,19 +89,40 @@ In order for the daily XP to _automatically_ reset _every night_ you need to set
 
 </details>
 
-<details>
-
 ## Prefs
-
-
 
 ### Editing Prefs
 
 <details>
    
-   <summary> Version 1.5 and Newer</summary>
+   <summary>Version 1.5 and Newer</summary>
    
    
+### Here is an explanation of each property:
+
+##### ```apiKey```, ```gamertag```, ```targetCompletionDate```
+
+These are set the first couple times you run the script. They are in the preferences file so you can change them later if you need.
+
+##### ```font```, ```fontSize```
+
+To see what fonts you can use, visit [iosfonts.com](http://iosfonts.com). These are the ones that come with iOS and that Scriptable can access. They are all case sensitive. For font size I recommend something between 12 and 24.
+
+##### ```showXPtoNextSR```
+
+Accepts ```"auto"```,```true```, or ```false```. Auto will only show it if you are below SR 151.
+
+##### ```showTotalXP```, ```showEmblem```, ```showSR```, ```showTodaysGoal```, ```showArmor```, ```showCustomAverageRate```, ```showCustomDaysGains```
+
+Accept ```true``` or ```false```. Self explanatory; it hides or shows certain elements.
+
+##### ```showXPtoMax```
+
+Accepts ```true``` or ```false```. If you are SR 152 already, it will show the remaining XP to 100 million, the hard cap.
+
+##### ```checkForUpdates```
+
+Accepts ```true``` or ```false```. If ```true```, each time you run the script it will check for new H5-XP updates in the Log from this Github. 
    
    </details>
 
