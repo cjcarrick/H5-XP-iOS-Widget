@@ -1,3 +1,7 @@
+// Variables used by Scriptable.
+// These must be at the very top of the file. Do not edit.
+// icon-color: deep-blue; icon-glyph: sync-alt;
+
 /*
 
 Detailed setup instructions and more info avalible at https://github.com/sac396/H5-XP-iOS-Widget.
@@ -45,8 +49,8 @@ let prefs = {
 	"use100MilInstead": false,
 
 	"updateStoredValuesOnEachRun": true,
-	// It doesn't always update exactly when it should, but it won't do it any sooner than this (in minutes):
-	"updateStoredValuesOnEachRunInterval": 60,
+	// It doesn't always update exactly when it should, but it won't do it any sooner than this (in hours):
+	"updateStoredValuesOnEachRunInterval": 0.0166667,
 
 	"checkForUpdates": true,
 
@@ -262,22 +266,25 @@ if (!fm.fileExists(fm.documentsDirectory() + "/H5-XP-storedValues.json") || pref
 
 // write new values to storedValues
 
-if (prefs.updateStoredValuesOnEachRun) {
+// if (prefs.updateStoredValuesOnEachRun) {
 
-	if ((new Date()) - (bottomMostDateTime.toTimeString()) > prefs.updateStoredValuesOnEachRunInterval * 60000) {
-		let currentXP = (await smartHTTPRequest("https://www.haloapi.com/stats/h5/servicerecords/arena?players=!gamertag"))["Results"][0]["Result"]["Xp"]
+// 	log(((prefs.updateStoredValuesOnEachRunInterval * 3600000) + Date.parse(bottomMostDateTime)))
+// 	log(Date.parse(bottomMostDateTime))
 
-		let WZDuration = (await smartHTTPRequest("https://www.haloapi.com/stats/h5/servicerecords/warzone?players=!gamertag"))["Results"][0]["Result"]["WarzoneStat"]["TotalTimePlayed"]
-		let ArenaDuration = (await smartHTTPRequest("https://www.haloapi.com/stats/h5/servicerecords/arena?players=!gamertag"))["Results"][0]["Result"]["ArenaStats"]["TotalTimePlayed"]
-		let currentHours = durationToHours(WZDuration) + durationToHours(ArenaDuration)
+// 	if (Date.parse(bottomMostDateTime) > ((prefs.updateStoredValuesOnEachRunInterval * 3600000) + Date.parse(bottomMostDateTime))) {
+// 		let currentXP = (await smartHTTPRequest("https://www.haloapi.com/stats/h5/servicerecords/arena?players=!gamertag"))["Results"][0]["Result"]["Xp"]
 
-		let now = new Date()
-		storedValues["xp"][now] = currentXP
-		storedValues["hours"][now] = currentHours
+// 		let WZDuration = (await smartHTTPRequest("https://www.haloapi.com/stats/h5/servicerecords/warzone?players=!gamertag"))["Results"][0]["Result"]["WarzoneStat"]["TotalTimePlayed"]
+// 		let ArenaDuration = (await smartHTTPRequest("https://www.haloapi.com/stats/h5/servicerecords/arena?players=!gamertag"))["Results"][0]["Result"]["ArenaStats"]["TotalTimePlayed"]
+// 		let currentHours = durationToHours(WZDuration) + durationToHours(ArenaDuration)
 
-		fm.writeString(fm.documentsDirectory() + "\/H5-XP-storedValues.json", JSON.stringify(storedValues, null, 4))
-	}
-}
+// 		let now = new Date()
+// 		storedValues["xp"][now] = currentXP
+// 		storedValues["hours"][now] = currentHours
+
+// 		fm.writeString(fm.documentsDirectory() + "\/H5-XP-storedValues.json", JSON.stringify(storedValues, null, 4))
+// 	}
+// }
 
 
 
