@@ -19,7 +19,7 @@ Takes your XP and SR too. There's no delay between the time you finish a match a
 You will need to get the following too:
 - An API key from developer.haloapi.com to access XP and SR information.
   - Sign up for the API [here](https://developer.haloapi.com/signin?ReturnUrl=%2Fproducts%2F560af1e42109182040fb56fc).
-  - Subscribe (it's free and they don't spam you), then you will see your keys. Either will work.
+  - Subscribe (it's free), then you will see your keys. Either of them will work.
 - A shortcut to automatically reset Daily XP part of the widget each night. This includes:
   - The [Shortcuts app](https://apps.apple.com/us/app/shortcuts/id1462947752).
   - [This shortcut](https://www.icloud.com/shortcuts/fab57f744cac480bb9faedbf754b0dca).
@@ -42,7 +42,7 @@ I tried to make this as easy to set up as possible. It shouldn't take more than 
 You will need to get the following too:
 - An API key from developer.haloapi.com to access XP and SR information.
   - Sign up for the API [here](https://developer.haloapi.com/signin?ReturnUrl=%2Fproducts%2F560af1e42109182040fb56fc).
-  - Subscribe (it's free and they don't spam you), then you will see your keys. Either will work.
+  - Subscribe (free), then you will see your keys. Either of them will work.
 - A shortcut to automatically reset Daily XP part of the widget each night. This includes:
   - The [Shortcuts app](https://apps.apple.com/us/app/shortcuts/id1462947752).
   - [This shortcut](https://www.icloud.com/shortcuts/f00ad74cf1d943e09c120585b4aa2e78).
