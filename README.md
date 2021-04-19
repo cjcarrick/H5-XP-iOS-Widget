@@ -60,7 +60,7 @@ In order for the daily XP to _automatically_ reset _every night_ you need to set
 4. Tap Next then add the action "Run Shortcut" and select the one we just made.
 5. Tap Next, **_uncheck "Ask Before Running"_**, then tap Done.
 
-#### Common Issues and Some things to note 
+#### Common Issues and Some Things to Note 
 
 ###### All Versions
 
@@ -151,9 +151,9 @@ let prefsSource.apiKey = "12345"
 
 These are set the first couple times you run the script. They are in the preferences file so you can change them later if you need.
 
-##### ```font```, ```fontSize```
+##### ```font```, ```fontSize```, ```heightOffset```
 
-To see what fonts you can use, visit [iosfonts.com](http://iosfonts.com). These are the ones that come with iOS and that Scriptable can access. They are all case sensitive. For font size I recommend something between 12 and 24.
+To see what fonts you can use, visit [iosfonts.com](http://iosfonts.com). These are the ones that come with iOS and that Scriptable can access. They are all case sensitive. For font size I recommend something between 12 and 24. Increase the heightOffset if the lines are too squished together.
 
 ##### ```showXPtoNextSR```
 
@@ -164,13 +164,30 @@ Accepts ```auto```,```always```, or ```never```. Auto will only show it if you a
 Accept ```true``` or ```false```. Self explanatory; it hides or shows certain elements.
 
 ##### ```showXPtoMax```
-
 Accepts ```true``` or ```false```. If you are SR 152 already, it will show the remaining XP to 100 million, the hard cap.
+
+##### ```customAverageRateDays```, ```customDaysGainsDays```
+Accepts ```positive non-zero integers``` (e.g: 1, 2, 3, 4...). Somewhat self explanatory. Note that if you set one of them to, say, 5 but you only have 3 entries in the H5-XP-storedValues.json, you won't get a very accurate calculation, but it will still work.
 
 ##### ```checkForUpdates```
 
 Accepts ```true``` or ```false```. If ```true```, each time you run the script it will check for new H5-XP updates in the Log from this Github. 
 
+##### ```use100MilInstead```
+
+Accepts ```true``` or ```false```. The "hard cap" for XP is actually 100,000,000; but there is no SR 153. This overrides the script to set goals and everything else based on this 100 mil scale. If you are already at or above 50 mil, this will be true no matter what.
+
+##### ```updateStoredValuesOnEachRun```, ```updateStoredValuesOnEachRunInterval```
+
+Currently WIP. Not functional. Changing values here will have no affect on the script. See Common Issues and Some Things to Note for more info.
+
+##### ```resetStoredValues```
+
+Accepts ```true``` or ```false```. This will reset the file at iCloud Drive/Scriptable/storedValues.json. It cannot be undone. Be sure that once you reset your stored values you change this back to false or every time you run the script that file will be wiped.
+
+##### ```useLog```
+
+Accepts ```true``` or ```false```. Whether or not to output to the console while running the script. I recommend leaving this true.
 
 ### Resetting Prefs
 
