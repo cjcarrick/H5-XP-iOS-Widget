@@ -12,9 +12,9 @@ Takes your XP and SR too. There's no delay between the time you finish a match a
    
 <summary>Version 1.5 and Newer</summary>
 
-1. On your iOS device, go [here](https://downgit.github.io/#/home?url=https://github.com/sac396/H5-XP-iOS-Widget/blob/main/H5-XP.scriptable) to download the script. You can also view the source code [here](https://github.com/sac396/H5-XP-iOS-Widget/blob/main/H5-XP.js)
+1. On your iOS device, go [here](https://downgit.github.io/#/home?url=https://github.com/sac396/H5-XP-iOS-Widget/blob/main/H5-XP.scriptable) to download the script. You can also view the source code [here](https://github.com/sac396/H5-XP-iOS-Widget/blob/main/H5-XP.js).
 2. A Zip file will be downloaded. Open it, and it should bring you to the files app. Tap the Zip file to unzip it, and a H5-XP.scriptable file will appear.
-3. Open it, tap the share on the bottom, thrn tap Scriptable.
+3. Open it, tap the share on the bottom, then tap Scriptable.
 
 You will need to get the following too:
 - An API key from developer.haloapi.com to access XP and SR information.
