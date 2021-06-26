@@ -197,6 +197,9 @@ You con reset the preferences to defaults by opening the files app and deleting 
 
 ##  Version History
 
+### v1.6
+- New feature: (Today's) **Playtime**
+
 ### v1.5
 - Preferences are now more "normal" and easier to edit. They are directly in the code.
 - New features: **XP to next SR**, **Lifteime XP/Hr rate**, **_n_ days XP/Hr rate**, and **Gains last _n_ days**.
