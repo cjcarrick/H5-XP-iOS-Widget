@@ -259,7 +259,6 @@ let bottomMostDate = bottomMostDateTime.toDateString()
 let key = datesString.match(new RegExp(bottomMostDate + "[^,]*"))
 xpAtDayStart = storedXPs[key]
 hoursAtDayStart = storedHours[key]
-console.log(hoursAtDayStart)
 
 if (!fm.fileExists(fm.documentsDirectory() + "/H5-XP-storedValues.json") || prefs["resetStoredValues"]) {
     log("🟡 Creating new H5-XP-storedValues.json file...")
@@ -467,7 +466,6 @@ if (prefs.showTodaysGoal) {
 }
 
 function hoursToHHMM(hours) {
-    console.log(hours)
     let HH = Math.floor(hours)
     let MM = Math.floor((hours - HH) * 60)
     return `${HH}:${MM}`
