@@ -227,9 +227,9 @@ if (prefs.useBackgroundImage && !fm.fileExists(fm.documentsDirectory() + "/H5-XP
 if (prefs.checkForUpdates) {
     let newestVer = await new Request("https://raw.githubusercontent.com/sac396/H5-XP-iOS-Widget/main/version.json").loadJSON()
     if (newestVer[0] > currentVer) {
-        log("🟡 Version " + newestVer[0] + " of H5-XP avalible at https://raw.githubusercontent.com/sac396/H5-XP-iOS-Widget/main/H5-XP.js. You have version " + currentVer)
+        console.log("🟡 Version " + newestVer[0] + " of H5-XP avalible at https://raw.githubusercontent.com/sac396/H5-XP-iOS-Widget/main/H5-XP.js. You have version " + currentVer)
     } else {
-        log("🟢 H5-XP is up to date. You have version " + currentVer)
+        console.log("🟢 H5-XP is up to date. You have version " + currentVer)
     }
 }
 
