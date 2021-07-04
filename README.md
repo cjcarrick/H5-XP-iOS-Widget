@@ -1,7 +1,8 @@
 # H5 XP
 Scriptable widget to show Halo 5 XP Progress from the Home Screen
 
-![preview.png](https://github.com/sac396/H5-XP/blob/main/preview.jpeg?raw=true)
+![preview.1png](https://github.com/sac396/H5-XP/blob/main/preview1.png?raw=true)
+![preview2.jpg](https://github.com/sac396/H5-XP/blob/main/preview2.jpg?raw=true)
 
 Takes your armor and emblem from the game.
 Takes your XP and SR too. There's no delay between the time you finish a match and gain XP and when the widget can access the data. All data comes direct from 343. The widget itself takes ≈3 seconds to refresh. You can see exactly how long it took in the log.
